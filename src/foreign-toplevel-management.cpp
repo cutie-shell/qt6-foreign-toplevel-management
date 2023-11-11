@@ -72,13 +72,13 @@ QSet<ForeignToplevelHandleV1::State> ForeignToplevelHandleV1::state() {
 void ForeignToplevelHandleV1::setState(QSet<ForeignToplevelHandleV1::State> state) {
 	foreach (ForeignToplevelHandleV1::State s, d->m_state - state) {
 		switch (s) {
-			case ForeignToplevelHandleV1::State::maximized: {
+			case ForeignToplevelHandleV1::State::Maximized: {
 				d->unset_maximized();
 			} break;
-			case ForeignToplevelHandleV1::State::minimized: {
+			case ForeignToplevelHandleV1::State::Minimized: {
 				d->unset_minimized();
 			} break;
-			case ForeignToplevelHandleV1::State::fullscreen: {
+			case ForeignToplevelHandleV1::State::Fullscreen: {
 				d->unset_fullscreen();
 			} break;
 			default: break;
@@ -87,17 +87,17 @@ void ForeignToplevelHandleV1::setState(QSet<ForeignToplevelHandleV1::State> stat
 
 	foreach (ForeignToplevelHandleV1::State s, state - d->m_state) {
 		switch (s) {
-			case ForeignToplevelHandleV1::State::maximized: {
+			case ForeignToplevelHandleV1::State::Maximized: {
 				d->set_maximized();
 			} break;
-			case ForeignToplevelHandleV1::State::minimized: {
+			case ForeignToplevelHandleV1::State::Minimized: {
 				d->set_minimized();
 			} break;
-			case ForeignToplevelHandleV1::State::activated: {
+			case ForeignToplevelHandleV1::State::Activated: {
 				d->activate(static_cast<QtWaylandClient::QWaylandScreen*>(
 					qApp->screens().first()->handle())->display()->defaultInputDevice()->wl_seat());
 			} break;
-			case ForeignToplevelHandleV1::State::fullscreen: {
+			case ForeignToplevelHandleV1::State::Fullscreen: {
 				d->set_fullscreen(static_cast<QtWaylandClient::QWaylandScreen*>(
 					qApp->screens().first()->handle())->output());
 			} break;

@@ -30,11 +30,12 @@ class Q_WAYLANDCLIENT_EXPORT ForeignToplevelHandleV1
 	Q_PROPERTY(QSet<State> state READ state WRITE setState NOTIFY stateChanged);
 public:
 	enum State {
-		maximized = 0, // the toplevel is maximized
-		minimized = 1, // the toplevel is minimized
-		activated = 2, // the toplevel is active
-		fullscreen = 3, // the toplevel is fullscreen
+		Maximized = 0, // the toplevel is maximized
+		Minimized = 1, // the toplevel is minimized
+		Activated = 2, // the toplevel is active
+		Fullscreen = 3, // the toplevel is fullscreen
 	};
+	Q_ENUM(State)
 
 	ForeignToplevelHandleV1(ForeignToplevelManagerV1Private *manager, void *object);
 	QString appId();
