@@ -19,6 +19,13 @@ void ForeignToplevelManagerV1Private::zwlr_foreign_toplevel_manager_v1_toplevel(
 	emit q->toplevelsChanged(m_toplevels);
 }
 
+void ForeignToplevelManagerV1Private::removeToplevel(
+	ForeignToplevelHandleV1 *toplevel
+) {
+	m_toplevels.removeAll(toplevel);
+	emit q->toplevelsChanged(m_toplevels);
+}
+
 ForeignToplevelHandleV1::ForeignToplevelHandleV1(ForeignToplevelManagerV1Private *manager, void *object)
 	: d(new ForeignToplevelHandleV1Private(this, manager,
 	  	(struct ::zwlr_foreign_toplevel_handle_v1 *)object)) {}
@@ -52,7 +59,7 @@ void ForeignToplevelHandleV1Private::zwlr_foreign_toplevel_handle_v1_state(wl_ar
 }
 
 void ForeignToplevelHandleV1Private::zwlr_foreign_toplevel_handle_v1_closed() {
-	m_manager->m_toplevels.removeAll(q);
+	m_manager->removeToplevel(q);
 	delete q;
 	delete this;
 }

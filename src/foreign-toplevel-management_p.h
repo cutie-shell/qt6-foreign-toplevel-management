@@ -15,6 +15,7 @@ class ForeignToplevelManagerV1Private
 	Q_OBJECT
 public:
 	ForeignToplevelManagerV1Private(ForeignToplevelManagerV1 *q);
+	void removeToplevel(ForeignToplevelHandleV1* toplevel);
 	QList<ForeignToplevelHandleV1*> m_toplevels;
 
 protected:
