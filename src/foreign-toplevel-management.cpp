@@ -9,21 +9,29 @@ ForeignToplevelManagerV1Private::ForeignToplevelManagerV1Private(
 		q(q) {}
 
 QList<ForeignToplevelHandleV1*> ForeignToplevelManagerV1::toplevels() {
-	return d->m_toplevels;
+	return d->m_toplevels.values();
+}
+
+ForeignToplevelHandleV1 *ForeignToplevelManagerV1::handleFromObject(void *object) {
+	return d->m_toplevels[static_cast<struct ::zwlr_foreign_toplevel_handle_v1 *>(object)];
 }
 
 void ForeignToplevelManagerV1Private::zwlr_foreign_toplevel_manager_v1_toplevel(
 	struct ::zwlr_foreign_toplevel_handle_v1 *toplevel
 ) {
-	m_toplevels.append(new ForeignToplevelHandleV1(this, toplevel));
-	emit q->toplevelsChanged(m_toplevels);
+	m_toplevels.insert(toplevel, new ForeignToplevelHandleV1(this, toplevel));
+	emit q->toplevelsChanged(m_toplevels.values());
 }
 
 void ForeignToplevelManagerV1Private::removeToplevel(
 	ForeignToplevelHandleV1 *toplevel
 ) {
-	m_toplevels.removeAll(toplevel);
-	emit q->toplevelsChanged(m_toplevels);
+	m_toplevels.removeIf([this, toplevel]
+		(QMap<struct ::zwlr_foreign_toplevel_handle_v1 *, ForeignToplevelHandleV1 *>::iterator i) {
+			return i.value() == toplevel;
+		}
+	);
+	emit q->toplevelsChanged(m_toplevels.values());
 }
 
 ForeignToplevelHandleV1::ForeignToplevelHandleV1(ForeignToplevelManagerV1Private *manager, void *object)

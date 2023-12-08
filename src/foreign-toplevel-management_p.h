@@ -16,14 +16,13 @@ class ForeignToplevelManagerV1Private
 public:
 	ForeignToplevelManagerV1Private(ForeignToplevelManagerV1 *q);
 	void removeToplevel(ForeignToplevelHandleV1* toplevel);
-	QList<ForeignToplevelHandleV1*> m_toplevels;
+	QMap<struct ::zwlr_foreign_toplevel_handle_v1 *, ForeignToplevelHandleV1 *> m_toplevels;
 
 protected:
 	void zwlr_foreign_toplevel_manager_v1_toplevel(
 		struct ::zwlr_foreign_toplevel_handle_v1 *toplevel) override;
-
-private:
 	ForeignToplevelManagerV1 *q;
+	friend class ForeignToplevelHandleV1Private;
 };
 
 class ForeignToplevelHandleV1Private
