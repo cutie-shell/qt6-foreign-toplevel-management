@@ -116,3 +116,7 @@ void ForeignToplevelHandleV1::setState(QSet<ForeignToplevelHandleV1::State> stat
 void ForeignToplevelHandleV1::close() {
 	d->close();
 }
+
+void *ForeignToplevelHandleV1::object() {
+	return d->object();
+}

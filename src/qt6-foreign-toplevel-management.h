@@ -43,6 +43,7 @@ public:
 	QSet<State> state();
 	void setState(QSet<State> state);
 	Q_INVOKABLE void close();
+	void *object();
 
 signals:
 	void appIdChanged(QString appId);
