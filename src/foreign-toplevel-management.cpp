@@ -120,3 +120,11 @@ void ForeignToplevelHandleV1::close() {
 void *ForeignToplevelHandleV1::object() {
 	return d->object();
 }
+
+ForeignToplevelManagerV1 *ForeignToplevelHandleV1::manager() {
+	return d->manager();
+}
+
+ForeignToplevelManagerV1 *ForeignToplevelHandleV1Private::manager() {
+	return m_manager->q;
+}

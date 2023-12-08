@@ -35,6 +35,8 @@ public:
 		ForeignToplevelHandleV1 *q, 
 		ForeignToplevelManagerV1Private *manager,
 		struct ::zwlr_foreign_toplevel_handle_v1 *object);
+
+	ForeignToplevelManagerV1 *manager();
 	
 	QString m_appId;
 	QString m_title;

@@ -44,6 +44,7 @@ public:
 	void setState(QSet<State> state);
 	Q_INVOKABLE void close();
 	void *object();
+	ForeignToplevelManagerV1 *manager();
 
 signals:
 	void appIdChanged(QString appId);
